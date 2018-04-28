@@ -23,7 +23,7 @@ Em um terminal Linux, execute o seguinte comando:
 
 **Notas:**
   - Para instalar módulos extras, [consulte a documentação](http://docs.python-zeep.org/en/master/).
-  - Para poder listas todas as operações do Zeep e como chamá-las, acesse [este link](http://docs.python-zeep.org/en/master/in_depth.html).
+  - Para poder listar todas as operações do Zeep e saber como chamá-las, acesse [este link](http://docs.python-zeep.org/en/master/in_depth.html).
 
 
 
