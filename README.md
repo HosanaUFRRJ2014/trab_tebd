@@ -12,13 +12,14 @@ Esta seção objetiva explicar resumidamente o esquema e a organização do repo
 
 ## Como configurar o ambiente de desenvolvimento:
 
-O sistema foi desenvolvido em **Python3** e utiliza a biblioteca **Zeep** para as requisições Soap.
+O sistema foi desenvolvido em **Python3** e utiliza a biblioteca **SimpleSoap** para as requisições Soap.
 
 ### Instalando a biblioteca de Protocolo Soap - Zeep:    
 
 Em um terminal Linux, execute o seguinte comando:
 
-    sudo pip3 install lxml==3.7.3 zeep
+	sudo pip3 install pysimplesoap
+
 
 
 **Notas:**
