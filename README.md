@@ -14,7 +14,7 @@ Esta seção objetiva explicar resumidamente o esquema e a organização do repo
 
 O sistema foi desenvolvido em **Python3** e utiliza a biblioteca **SimpleSoap** para as requisições Soap.
 
-### Instalando a biblioteca de Protocolo Soap - Zeep:    
+### Instalando a biblioteca de Protocolo Soap:   
 
 Em um terminal Linux, execute o seguinte comando:
 
