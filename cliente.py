@@ -1,11 +1,13 @@
 import requests
 import xml.etree.ElementTree as ET
+import sys
 
+#DONE: Colocar como parâmetro de terminal
+#URL_SERVIDOR = "http://ruralruby.dlinkddns.com:8011"
 
-
-##TODO: Colocar como parâmetro de terminal
-URL_SERVIDOR = "http://ruralruby.dlinkddns.com:8011"
-
+URL_SERVIDOR  = str(sys.argv[1])
+NOME_METODO   = str(sys.argv[2])
+CAMINHO_ARQ   = str(sys.argv[3])
 """ 
 NOTA: Usar POST para o método submeter 
 e GET para o método consultarStatus.
@@ -30,10 +32,6 @@ def lerArquivo(nomeArquivo):
 	texto = arquivo.read()
 	arquivo.close()
 	return texto
-
-
-
-
 
 """
 Método para a submissao de um Bolhetim
@@ -61,11 +59,22 @@ def consultarStatus(xmlcpf):
 
 
 def main():
-	conteudoXML_status = lerArquivo("exemplos/consultStatus4.xml")
-	consultarStatus(conteudoXML_status)
 
+	
+	#conteudoXML_status = lerArquivo("exemplos/consultStatus4.xml")
 	#conteudoXML = lerArquivo("exemplos/methodCall.xml")
-#	submeter(conteudoXML)
+
+	conteudoXML_status = lerArquivo(CAMINHO_ARQ)
+	conteudoXML 	   = lerArquivo(CAMINHO_ARQ)
+
+	if NOME_METODO == "consultarStatus":
+		consultarStatus(conteudoXML_status)
+
+	elif NOME_METODO == "submeter":
+		submeter(conteudoXML)
+
+	else:
+		print("Opção inválida!")
 
 
 #Executar função main
