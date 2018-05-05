@@ -41,7 +41,8 @@ FIXME: Não está funcionando
 """
 
 def submeter(conteudoXML): 
-	resposta = requests.post(url=URL_SERVIDOR,data=conteudoXML)
+	headers = {'content-type': 'text/xml'}
+	resposta = requests.post(url=URL_SERVIDOR,data=conteudoXML, headers=headers)
 
 	##TODO: Trocar isso por uma resposta e parsear e apresentar os dados ao usuário
 	print("Resposta: ", resposta.content)
@@ -60,10 +61,10 @@ def consultarStatus(xmlcpf):
 
 
 def main():
-	conteudoXML_status = lerArquivo("consultStatus4.xml")
+	conteudoXML_status = lerArquivo("exemplos/consultStatus4.xml")
 	consultarStatus(conteudoXML_status)
 
-#	conteudoXML = lerArquivo("methodCall.xml")
+	#conteudoXML = lerArquivo("exemplos/methodCall.xml")
 #	submeter(conteudoXML)
 
 
