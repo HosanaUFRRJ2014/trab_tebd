@@ -1,6 +1,8 @@
 import requests
 import xml.etree.ElementTree as ET
 import sys
+from lxml import etree
+from io import StringIO, BytesIO
 
 #DONE: Colocar como parâmetro de terminal
 #URL_SERVIDOR = "http://ruralruby.dlinkddns.com:8011"
@@ -25,8 +27,6 @@ r = requests.get(url = url, params = PARAMS)
 print(r.content)  #necessário parsear o xml depois
 """
 
-
-
 def lerArquivo(nomeArquivo):
 	arquivo = open(nomeArquivo,'r')
 	texto = arquivo.read()
@@ -39,11 +39,31 @@ FIXME: Não está funcionando
 """
 
 def submeter(conteudoXML): 
-	headers = {'content-type': 'text/xml'}
+
+	headers  = {'content-type': 'text/xml'}
 	resposta = requests.post(url=URL_SERVIDOR,data=conteudoXML, headers=headers)
 
-	##TODO: Trocar isso por uma resposta e parsear e apresentar os dados ao usuário
-	print("Resposta: ", resposta.content)
+	parser 	 	  = etree.XMLParser(remove_blank_text=True)
+	iterador 	  = etree.XML(resposta, parser)
+	#respostateste = etree.XML("<methodReturn> <methodName>submeter</methodName> <value>1</value> </methodReturn>", parser)
+
+
+	for elemento in iterador.iter("*"):
+		if elemento.tag == 'value':
+			if 	 elemento.text == '0' or elemento.text == ' 0 ':
+				print("Sucesso!")
+
+			elif elemento.text == '1' or elemento.text == ' 1 ':
+				print("XML inválido.")
+
+			elif elemento.text == '2' or elemento.text == ' 2 ':
+				print("XML mal-formado.")
+
+			elif elemento.text == '3' or elemento.text == ' 3 ':
+				print("Erro interno.")
+
+	#DONE: Trocar isso por uma resposta e parsear e apresentar os dados ao usuário
+	#print("Resposta: ", resposta.content)
 
 
 """
@@ -54,15 +74,37 @@ def consultarStatus(xmlcpf):
 	headers = {'content-type': 'text/xml'}
 	resposta = requests.get(url = URL_SERVIDOR, data = xmlcpf, headers=headers)
 
+	parser 	 	  = etree.XMLParser(remove_blank_text=True)
+	iterador 	  = etree.XML(resposta, parser)
+	#respostateste = etree.XML("<methodCall><methodName>consultarStatus</methodName><params><param><cpf>00000000003</cpf></param></params></methodCall>", parser)
+
+
+	for elemento in respostateste.iter("*"):
+		if elemento.tag == 'cpf':
+			if 	 elemento.text == '0000000000' or elemento.text == ' 00000000000 ':
+				print("Candidato não encontrado.")
+
+			elif elemento.text == '00000000001' or elemento.text == ' 00000000001 ':
+				print("Em processamento.")
+
+			elif elemento.text == '00000000002' or elemento.text == ' 00000000002 ':
+				print("Candidato aprovado e selecionado.")
+
+			elif elemento.text == '00000000003' or elemento.text == ' 00000000003 ':
+				print("Candidato aprovado e em espera.")
+
+			elif elemento.text == '00000000004' or elemento.text == ' 00000000004 ':
+				print("Candidato não aprovado.")
+
 	#TODO: Trocar isso por uma resposta e parsear e apresentar os dados ao usuário
-	print(resposta.content)
+	#print(resposta.content)
 
 
 def main():
 
 	
 	#conteudoXML_status = lerArquivo("exemplos/consultStatus4.xml")
-	#conteudoXML = lerArquivo("exemplos/methodCall.xml")
+	#conteudoXML 		= lerArquivo("exemplos/methodCall.xml")
 
 	conteudoXML_status = lerArquivo(CAMINHO_ARQ)
 	conteudoXML 	   = lerArquivo(CAMINHO_ARQ)
