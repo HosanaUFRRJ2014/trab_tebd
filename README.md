@@ -1,7 +1,7 @@
 # Trabalho de TEBD - Cliente que se comunica por XML 
 
 Este trabalho foi apresentado à disciplina de Tópicos Especiais em Banco de Dados (TEBD) no semestre 2018.1.
-O objetivo do repositório é apresentar uma estrutura de Cliente que utiliza protocolo XML para se comunicar com um servidor remoto. Toda a troca de informação entre Cliente e Servidor ocorre apenas via XML. XSDs são usados para a validação e verificação dos XMLs usados nas trocas de informações do sistema do lado do cliente.
+O objetivo do repositório é apresentar uma estrutura de Cliente que utiliza protocolo XML para se comunicar com um servidor remoto. Toda a troca de informação entre Cliente e Servidor ocorre apenas via XML. XSDs são usados para a validação e verificação dos XMLs usados nas trocas de informações do sistema do lado do servidor.
 
 
 ## Organização do repositório
@@ -29,7 +29,7 @@ Em um terminal Linux, execute o seguinte comando:
 ## Executando a aplicação:
 
 
-A aplicação recebe como parâmetro a url de um servidor (<URL_SERVIDOR>) que aceite requisições do cliente, o método que se deseja executar (<NOME_MÉTODO_APLICAÇÃO>), isto é, ```submeter``` ou ```consultarStatus```, e o nome do arquivo XML o qual será enviado o conteúdo (<NOME_ARQUIVO_XML>).
+A aplicação recebe como parâmetro a url de um servidor (**<URL_SERVIDOR>**) que aceite requisições do cliente, o método que se deseja executar (**<NOME_MÉTODO_APLICAÇÃO>**), isto é, ```submeter``` ou ```consultarStatus```, e o nome do arquivo XML o qual será enviado o conteúdo (**<NOME_ARQUIVO_XML>**).
 
 Abaixo, segue o formato de uma execução do cliente:
 
