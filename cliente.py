@@ -76,24 +76,24 @@ def consultarStatus(xmlcpf):
 
 	parser 	 	  = etree.XMLParser(remove_blank_text=True)
 	iterador 	  = etree.XML(resposta.content, parser)
-	#respostateste = etree.XML("<methodCall><methodName>consultarStatus</methodName><params><param><cpf>00000000003</cpf></param></params></methodCall>", parser)
+	#respostateste = etree.XML("<methodReturn><methodName>consultarStatus</methodName><value>4</value></methodReturn>", parser)
 
 
-	for elemento in respostateste.iter("*"):
-		if elemento.tag == 'cpf':
-			if 	 elemento.text == '0000000000' or elemento.text == ' 00000000000 ':
+	for elemento in iterador.iter("*"):
+		if elemento.tag == 'value':
+			if 	 elemento.text == '0' or elemento.text == ' 0 ':
 				print("Candidato não encontrado.")
 
-			elif elemento.text == '00000000001' or elemento.text == ' 00000000001 ':
+			elif elemento.text == '1' or elemento.text == ' 1 ':
 				print("Em processamento.")
 
-			elif elemento.text == '00000000002' or elemento.text == ' 00000000002 ':
+			elif elemento.text == '2' or elemento.text == ' 2 ':
 				print("Candidato aprovado e selecionado.")
 
-			elif elemento.text == '00000000003' or elemento.text == ' 00000000003 ':
+			elif elemento.text == '3' or elemento.text == ' 3 ':
 				print("Candidato aprovado e em espera.")
 
-			elif elemento.text == '00000000004' or elemento.text == ' 00000000004 ':
+			elif elemento.text == '4' or elemento.text == ' 4 ':
 				print("Candidato não aprovado.")
 
 	#TODO: Trocar isso por uma resposta e parsear e apresentar os dados ao usuário
