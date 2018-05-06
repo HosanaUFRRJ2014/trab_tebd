@@ -8,8 +8,8 @@ O objetivo do repositório é apresentar uma estrutura de Cliente que utiliza pr
 
 Esta seção objetiva explicar resumidamente o esquema e a organização do repositório da aplicação.
 
-- A pasta *exemplos* contém exemplos de teste de xml que serão consumidos pela aplicação.
-- O arquivo *cliente.py* é a aplicação do cliente 
+- A pasta *exemplos* contém exemplos de teste de xml que serão consumidos pela aplicação;
+- O arquivo *cliente.py* é a aplicação do cliente. 
 
 
 
