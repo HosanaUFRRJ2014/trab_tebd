@@ -44,7 +44,7 @@ def submeter(conteudoXML):
 	resposta = requests.post(url=URL_SERVIDOR,data=conteudoXML, headers=headers)
 
 	parser 	 	  = etree.XMLParser(remove_blank_text=True)
-	iterador 	  = etree.XML(resposta, parser)
+	iterador 	  = etree.XML(resposta.content, parser)
 	#respostateste = etree.XML("<methodReturn> <methodName>submeter</methodName> <value>1</value> </methodReturn>", parser)
 
 
@@ -75,7 +75,7 @@ def consultarStatus(xmlcpf):
 	resposta = requests.get(url = URL_SERVIDOR, data = xmlcpf, headers=headers)
 
 	parser 	 	  = etree.XMLParser(remove_blank_text=True)
-	iterador 	  = etree.XML(resposta, parser)
+	iterador 	  = etree.XML(resposta.content, parser)
 	#respostateste = etree.XML("<methodCall><methodName>consultarStatus</methodName><params><param><cpf>00000000003</cpf></param></params></methodCall>", parser)
 
 
