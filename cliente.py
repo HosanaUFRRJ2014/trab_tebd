@@ -4,28 +4,15 @@ import sys
 from lxml import etree
 from io import StringIO, BytesIO
 
-#DONE: Colocar como parâmetro de terminal
-#URL_SERVIDOR = "http://ruralruby.dlinkddns.com:8011"
+
+#URL_SERVIDOR = "http://ruralruby.dlinkddns.com:8011" #Angelo. Só funciona o get (consultarStatus)
+#URL_SERVIDOR = "http://tebd.000webhostapp.com" #Matheus . Funciona get e post, submeter e consultar
+
 
 URL_SERVIDOR  = str(sys.argv[1])
 NOME_METODO   = str(sys.argv[2])
 CAMINHO_ARQ   = str(sys.argv[3])
-""" 
-NOTA: Usar POST para o método submeter 
-e GET para o método consultarStatus.
 
-
-Exemplo de requisição GET que funciona
-url = "http://maps.googleapis.com/maps/api/geocode/xml"
-
-
-location = "delhi technological university"
-PARAMS = {'address':location}
- 
-r = requests.get(url = url, params = PARAMS)
-
-print(r.content)  #necessário parsear o xml depois
-"""
 
 def lerArquivo(nomeArquivo):
 	arquivo = open(nomeArquivo,'r')
@@ -36,12 +23,16 @@ def lerArquivo(nomeArquivo):
 """
 Método para a submissao de um Bolhetim
 FIXME: Não está funcionando
+
+envia um boletim como parâmetro e retorna um número inteiro 
+	0 - sucesso, 
+	1 - XML inválido, 
+	2 - XML mal-formado, 
+	3 - Erro Interno
+
 """
-
 def submeter(conteudoXML): 
-
-	headers  = {'content-type': 'text/xml'}
-	resposta = requests.post(url=URL_SERVIDOR,data=conteudoXML, headers=headers)
+	resposta = requests.post(url=URL_SERVIDOR,data= conteudoXML)
 
 	parser 	 	  = etree.XMLParser(remove_blank_text=True)
 	iterador 	  = etree.XML(resposta.content, parser)
@@ -68,7 +59,21 @@ def submeter(conteudoXML):
 
 """
 Dado um xml dentro de um parâmentro, o método imprime o xml de resposta.
-TODO: Parsear a resposta para apresentar ao usuário
+
+Possíveis retornos: 
+	0 - Candidato não encontrado, 
+	1 - Em processamento, 
+	2 - Candidato Aprovado e Selecionado, 
+	3 - Candidato Aprovado e em Espera, 
+	4 - Candidato Não Aprovado.
+
+
+	00000000000 -> Código 0
+	00000000001 -> Código 1
+	00000000002 -> Código 2
+	00000000003 -> Código 3
+	00000000004 -> Código 4
+
 """
 def consultarStatus(xmlcpf):
 	headers = {'content-type': 'text/xml'}
@@ -100,11 +105,21 @@ def consultarStatus(xmlcpf):
 	#print(resposta.content)
 
 
-def main():
 
-	
-	#conteudoXML_status = lerArquivo("exemplos/consultStatus4.xml")
-	#conteudoXML 		= lerArquivo("exemplos/methodCall.xml")
+
+"""
+Para executar a aplicação:
+
+python3 cliente.py URL_SERVIDOR NOME_METODO ARQUIVO_XML
+
+Ex:
+
+python3 cliente.py http://tebd.000webhostapp.com submeter exemplos/methodCall.xml 
+python3 cliente.py http://tebd.000webhostapp.com consultarStatus exemplos/consultStatus4.xml 
+
+
+"""
+def main():
 
 	conteudoXML_status = lerArquivo(CAMINHO_ARQ)
 	conteudoXML 	   = lerArquivo(CAMINHO_ARQ)
