@@ -61,6 +61,9 @@ def submeter(conteudoXML):
 Dado um xml dentro de um parâmentro, o método imprime o xml de resposta.
 
 Possíveis retornos: 
+
+	-2 pra xml mal-formado e -1 pra xml invalido 
+
 	0 - Candidato não encontrado, 
 	1 - Em processamento, 
 	2 - Candidato Aprovado e Selecionado, 
@@ -86,7 +89,13 @@ def consultarStatus(xmlcpf):
 
 	for elemento in iterador.iter("*"):
 		if elemento.tag == 'value':
-			if 	 elemento.text == '0' or elemento.text == ' 0 ':
+			if 	 elemento.text == '-2' or elemento.text == ' -2 ':
+				print("XML mal-formatado.")
+
+			elif elemento.text == '-1' or elemento.text == ' -1 ':
+				print("XML inválido.")
+			
+			elif elemento.text == '0' or elemento.text == ' 0 ':
 				print("Candidato não encontrado.")
 
 			elif elemento.text == '1' or elemento.text == ' 1 ':
@@ -115,7 +124,7 @@ python3 cliente.py URL_SERVIDOR NOME_METODO ARQUIVO_XML
 Ex:
 
 python3 cliente.py http://tebd.000webhostapp.com submeter exemplos/methodCall.xml 
-python3 cliente.py http://tebd.000webhostapp.com consultarStatus exemplos/consultStatus4.xml 
+python3 cliente.py http://tebd.000webhostapp.com consultarStatus exemplos/consultarStatus4.xml 
 
 
 """
